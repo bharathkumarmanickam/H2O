@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".civibook">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#DDDDDD"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/logo"
+            tools:layout_editor_absoluteX="34dp" />
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BOOK YOUR CAN"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:layout_marginTop="70dp"
+        android:paddingLeft="30dp"
+        android:layout_marginBottom="35dp"/>
+
+
+    <EditText
+        android:id="@+id/quan"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/input"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="25dp"
+        android:hint="Enter Quantity"
+        android:fontFamily="sans-serif"
+        android:paddingLeft="14dp"/>
+
+    <EditText
+        android:id="@+id/rpq"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/input"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="25dp"
+        android:hint="Rate Per Quantity"
+        android:fontFamily="sans-serif"
+        android:paddingLeft="14dp"/>
+
+    <EditText
+        android:id="@+id/tc"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/input"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="45dp"
+        android:hint="Total Cost"
+        android:fontFamily="sans-serif"
+        android:paddingLeft="14dp"/>
+
+    <Button
+        android:id="@+id/byc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Book My Can "
+        android:layout_marginLeft="90dp"
+        android:layout_marginRight="90dp"
+        android:textSize="17dp"
+        android:background="@drawable/circlebut"
+        app:backgroundTint="#1D92EF"
+        android:layout_marginBottom="20dp" >
+
+    </Button>
+    <Button
+        android:id="@+id/gth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Go To Home "
+        android:layout_marginLeft="90dp"
+        android:layout_marginRight="90dp"
+        android:textSize="17dp"
+        android:background="@drawable/circlebut"
+        app:backgroundTint="#1D92EF"
+        android:layout_marginBottom="60dp" >
+
+    </Button>
+
+</LinearLayout>

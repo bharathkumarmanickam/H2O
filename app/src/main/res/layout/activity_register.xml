@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".register">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#DDDDDD"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/logo"
+            tools:layout_editor_absoluteX="34dp" />
+    </androidx.appcompat.widget.Toolbar>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+    <TextView
+        android:id="@+id/regi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Regsiter"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:layout_marginBottom="35dp"/>
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/input"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="25dp"
+        android:hint="Full name"
+        android:fontFamily="sans-serif"
+        android:drawableLeft="@drawable/username"
+        android:paddingLeft="9dp"
+        android:drawablePadding="14dp"/>
+    <EditText
+        android:id="@+id/mobone"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/input"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="25dp"
+        android:hint="Phone-no"
+        android:fontFamily="sans-serif"
+        android:drawableLeft="@drawable/call"
+        android:paddingLeft="9dp"
+        android:drawablePadding="14dp"/>
+
+    <EditText
+        android:id="@+id/mob2"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/input"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="25dp"
+        android:hint="Alternate No"
+        android:fontFamily="sans-serif"
+        android:drawableLeft="@drawable/call"
+        android:paddingLeft="9dp"
+        android:drawablePadding="14dp"/>
+
+    <EditText
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/input"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="25dp"
+        android:hint="Address"
+        android:fontFamily="sans-serif"
+        android:drawableLeft="@drawable/address"
+        android:paddingLeft="9dp"
+        android:drawablePadding="14dp"/>
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/input"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="25dp"
+        android:hint="Email-ID"
+        android:fontFamily="sans-serif"
+        android:drawableLeft="@drawable/email"
+        android:paddingLeft="9dp"
+        android:drawablePadding="14dp"/>
+
+    <EditText
+        android:id="@+id/pass"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/input"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="25dp"
+        android:hint="password"
+        android:fontFamily="sans-serif"
+        android:drawableLeft="@drawable/pass"
+        android:paddingLeft="9dp"
+        android:drawablePadding="14dp"/>
+
+    <EditText
+        android:id="@+id/conpass"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/input"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="25dp"
+        android:hint="Confirm password"
+        android:fontFamily="sans-serif"
+        android:drawableLeft="@drawable/pass"
+        android:paddingLeft="9dp"
+        android:drawablePadding="14dp"/>
+
+
+
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/input"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="25dp"
+                android:hint="choose type"
+                android:fontFamily="sans-serif"
+                android:drawableLeft="@drawable/username"
+                android:paddingLeft="9dp"
+                android:drawablePadding="14dp"/>
+            <Button
+                android:id="@+id/registerbut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Setup profile "
+                android:layout_marginLeft="90dp"
+                android:layout_marginRight="90dp"
+                android:textSize="17dp"
+                android:background="@drawable/choosebut"
+                app:backgroundTint="#1D92EF"
+                android:layout_marginBottom="60dp" >
+
+            </Button>
+
+            <TextView
+                android:id="@+id/logincta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Go To Login"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="40dp"
+                android:layout_marginBottom="40dp"
+                android:textSize="19dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

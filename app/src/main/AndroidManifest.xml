@@ -9,13 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.H2O">
-        <activity android:name=".MainActivity">
+        <activity android:name=".proopenorders"></activity>
+        <activity android:name=".prohome" />
+        <activity android:name=".proconorders" />
+        <activity android:name=".proconfirm" />
+        <activity android:name=".prosuccess" />
+        <activity android:name=".civisuccess" />
+        <activity android:name=".civibook" />
+        <activity android:name=".civiorders" />
+        <activity android:name=".civihome" />
+        <activity android:name=".register" />
+        <activity android:name=".login" />
+        <activity android:name=".spash_scrren">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

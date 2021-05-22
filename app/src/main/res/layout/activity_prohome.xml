@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
-
+    tools:context=".prohome">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -23,45 +22,52 @@
             android:layout_height="50dp"
             app:srcCompat="@drawable/logo"
             tools:layout_editor_absoluteX="34dp" />
-
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="WELCOME"
-        android:gravity="center"
-        android:fontFamily="sans-serif-black"
-        android:textColor="@color/black"
-        android:textSize="25dp"
-        android:layout_marginTop="180dp"
-        android:layout_marginBottom="50dp"/>
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="216dp"
+        android:layout_height="216dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        app:srcCompat="@drawable/logo"
+        android:layout_marginBottom="80dp"/>
 
     <Button
-        android:id="@+id/civi"
+        android:id="@+id/cta11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:background="@drawable/choosebut"
-        android:fontFamily="sans-serif-black"
-        android:text="CIVILIAN"
-        android:textSize="20dp"
+        android:text="Show Open Orders "
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:textSize="17dp"
+        android:background="@drawable/circlebut"
         app:backgroundTint="#1D92EF"
-        android:layout_marginBottom="30dp"/>
+        android:layout_marginBottom="20dp" />
 
     <Button
-        android:id="@+id/provider"
+        android:id="@+id/cta22"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:background="@drawable/choosebut"
-        android:fontFamily="sans-serif-black"
-        android:text="PROVIDER"
-        android:textSize="20dp"
-        app:backgroundTint="#1D92EF" />
+        android:text="Confirmed Orders "
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:textSize="17dp"
+        android:background="@drawable/circlebut"
+        app:backgroundTint="#1D92EF"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:id="@+id/cta33"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:textSize="17dp"
+        android:background="@drawable/circlebut"
+        app:backgroundTint="#1D92EF"
+        android:layout_marginBottom="70dp" />
 
 
 </LinearLayout>
