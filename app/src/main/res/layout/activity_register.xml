@@ -74,7 +74,7 @@
         android:drawablePadding="14dp"/>
 
     <EditText
-        android:id="@+id/mob2"
+        android:id="@+id/mobtwo"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@drawable/input"
