@@ -59,7 +59,7 @@
         android:textSize="17dp"
         android:textStyle="bold" />
         <TextView
-            android:id="@+id/text2"
+            android:id="@+id/id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
