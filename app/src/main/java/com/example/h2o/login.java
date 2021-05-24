@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -40,6 +41,7 @@ public class login extends AppCompatActivity {
         builder = new AlertDialog.Builder(login.this);
         builder.setCancelable(true);
         builder.setTitle("H2O");
+        auth = FirebaseAuth.getInstance();
         ft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,12 +75,14 @@ public class login extends AppCompatActivity {
                                         progressDialog.dismiss();
                                     }
                                     if (task.isSuccessful()) {
-                                            if(type == "0"){
+                                            if(type.equals("0")){
                                                 startActivity(new Intent(login.this, civihome.class));
                                                 finish();
-                                            }else{
+                                            }else if(type.equals("1")){
                                                 startActivity(new Intent(login.this, prohome.class));
                                                 finish();
+                                            }else{
+                                                Toast.makeText(login.this, type, Toast.LENGTH_SHORT).show();
                                             }
 
                                     } else {

@@ -26,25 +26,30 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
-public class register extends AppCompatActivity implements AdapterView.OnItemClickListener {
+import java.util.regex.Pattern;
+
+public class register extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner myspinner;
     String text;
-    EditText fname,mob,mobto,add,mail,pass,conpas;
+    EditText fname,mob,mobto,add,email,ppass,conpas;
     Button register;
     TextView login;
     FirebaseAuth mauth;
-    String full,mobile,mobiletwo,address,email,paswd,conpaswd,type;
+    String full,mobile,mobiletwo,address,mail,pass,conpaswd,type;
     AlertDialog.Builder builder;
     ProgressDialog progressDialog;
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    "(?=.*[@#$%^&+=])" +     // at least 1 special character
+                    "(?=\\S+$)" +            // no white spaces
+                    ".{4,}" +                // at least 4 characters
+                    "$");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         myspinner = (Spinner) findViewById(R.id.spinner1);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.names, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        myspinner.setAdapter(adapter);
-        myspinner.setOnItemClickListener(this);
+        myspinner.setOnItemSelectedListener(register.this);
 
         builder = new AlertDialog.Builder(register.this);
         builder.setCancelable(true);
@@ -54,24 +59,19 @@ public class register extends AppCompatActivity implements AdapterView.OnItemCli
         mob = (EditText) findViewById(R.id.mobone);
         mobto = (EditText) findViewById(R.id.mobtwo);
         add = (EditText) findViewById(R.id.address);
-        mail = (EditText) findViewById(R.id.email);
-        pass = (EditText) findViewById(R.id.pass);
+        email = (EditText) findViewById(R.id.email);
+        ppass = (EditText) findViewById(R.id.pass);
         conpas = (EditText) findViewById(R.id.conpass);
         register = (Button) findViewById(R.id.registerbut);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog = new ProgressDialog(register.this);
-                progressDialog.setMessage("Registerin client Please wait.....");
-                progressDialog.setCancelable(false);
-                progressDialog.setTitle("H2O");
-                progressDialog.show();
                 full = fname.getText().toString().trim();
                 mobile = mob.getText().toString().trim();
                 mobiletwo = mobto.getText().toString().trim();
                 address = add.getText().toString().trim();
-                email = mail.getText().toString().trim();
-                paswd = pass.getText().toString().trim();
+                mail = email.getText().toString().trim();
+                pass = ppass.getText().toString().trim();
                 conpaswd = conpas.getText().toString().trim();
                 type = text;
 
@@ -79,61 +79,59 @@ public class register extends AppCompatActivity implements AdapterView.OnItemCli
                     if(!TextUtils.isEmpty(mobile)){
                         if(!TextUtils.isEmpty(mobiletwo)){
                             if(!TextUtils.isEmpty(address)){
-                                if(!TextUtils.isEmpty(email)){
-                                    if(!TextUtils.isEmpty(paswd)){
+                                if(!TextUtils.isEmpty(mail)){
+                                    if(!TextUtils.isEmpty(pass)){
                                         if(!TextUtils.isEmpty(conpaswd)){
-                                            if(paswd == conpaswd){
-                                                mauth.fetchSignInMethodsForEmail(email)
-                                                        .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
-                                                            @Override
-                                                            public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
-                                                                boolean check = !task.getResult().getSignInMethods().isEmpty();
-                                                                if(!check){
+                                            if(pass.equals(conpaswd)){
+                                                if(PASSWORD_PATTERN.matcher(pass).matches()) {
+                                                    progressDialog = new ProgressDialog(register.this);
+                                                    progressDialog.setMessage("Registerin client Please wait.....");
+                                                    progressDialog.setCancelable(false);
+                                                    progressDialog.setTitle("H2O");
+                                                    progressDialog.show();
 
-                                                                    mauth.createUserWithEmailAndPassword(email,paswd)
-                                                                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                                                                @Override
-                                                                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                                                                    if(task.isSuccessful()){
-                                                                                        details det = new details(full,mobile,mobiletwo,address,email,paswd,conpaswd);
-                                                                                        FirebaseDatabase.getInstance().getReference("Users")
-                                                                                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                                                                .setValue(det).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                            @Override
-                                                                                            public void onComplete(@NonNull Task<Void> task) {
-                                                                                                if(task.isSuccessful()){
-                                                                                                    Intent intent = new Intent(register.this, MainActivity.class);
-                                                                                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                                                                    startActivity(intent);
-                                                                                                }
-                                                                                                else{
-                                                                                                    if(progressDialog.isShowing()){
-                                                                                                        progressDialog.dismiss();
-                                                                                                    }
-                                                                                                    builder.setMessage("Please Try Again...");
-                                                                                                    builder.show();
-                                                                                                }
-                                                                                            }
-                                                                                        });
-                                                                                    }else{
-                                                                                        builder.setMessage("Please Try Again...");
-                                                                                        builder.show();
+                                                    mauth.createUserWithEmailAndPassword(mail, pass)
+                                                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                                                    if (task.isSuccessful()) {
+                                                                        details det = new details(full, mobile, mobiletwo, address, mail, pass, conpaswd, type);
+                                                                        FirebaseDatabase.getInstance().getReference("Users")
+                                                                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                                                .setValue(det).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                            @Override
+                                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                                if (task.isSuccessful()) {
+                                                                                    Intent intent = new Intent(register.this, MainActivity.class);
+                                                                                    startActivity(intent);
+                                                                                    finish();
+                                                                                } else {
+                                                                                    if (progressDialog.isShowing()) {
+                                                                                        progressDialog.dismiss();
                                                                                     }
+                                                                                    builder.setMessage("Please ReTry Again...");
+                                                                                    builder.show();
                                                                                 }
-                                                                            });
+                                                                            }
+                                                                        });
 
-                                                                }else{
-                                                                    Toast.makeText(register.this,"Email already exists",Toast.LENGTH_SHORT).show();
-                                                                    mail.setError("Email already exists");
-                                                                    mail.requestFocus();
-                                                                    return;
-
+                                                                    } else {
+                                                                        if (progressDialog.isShowing()) {
+                                                                            progressDialog.dismiss();
+                                                                        }
+                                                                        builder.setMessage("Please Try Again...");
+                                                                        builder.show();
+                                                                    }
                                                                 }
-                                                            }
-                                                        });
+                                                            });
+                                                }else{
+                                                    ppass.setError("Password should contain one upper case and one lower case and one specail character and one number");
+                                                    ppass.requestFocus();
+                                                }
+
                                             }else{
-                                                pass.setError("password and confirm password should be same");
-                                                pass.requestFocus();
+                                                ppass.setError("password and confirm password should be same");
+                                                ppass.requestFocus();
                                                 conpas.requestFocus();
                                             }
                                         }else{
@@ -141,12 +139,12 @@ public class register extends AppCompatActivity implements AdapterView.OnItemCli
                                             conpas.requestFocus();
                                         }
                                     }else{
-                                        pass.setError("Password cannot be empty");
-                                        pass.requestFocus();
+                                        ppass.setError("Password cannot be empty");
+                                        ppass.requestFocus();
                                     }
                                 }else{
-                                    mail.setError("Mail Id cannot be empty");
-                                    mail.requestFocus();
+                                    email.setError("Mail Id cannot be empty");
+                                    email.requestFocus();
                                 }
                             }else{
                                 add.setError("Address cannot be empty");
@@ -178,9 +176,13 @@ public class register extends AppCompatActivity implements AdapterView.OnItemCli
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(register.this,text,Toast.LENGTH_SHORT).show();
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        text = parent.getSelectedItem().toString();
+        Toast.makeText(this, parent.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }

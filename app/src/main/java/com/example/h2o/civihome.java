@@ -20,20 +20,19 @@ public class civihome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(civihome.this,civibook.class));
-                finish();
             }
         });
         two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(civihome.this,civiorders.class));
-                finish();
             }
         });
         three.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(civihome.this, login.class));
+                finish();
 
             }
         });

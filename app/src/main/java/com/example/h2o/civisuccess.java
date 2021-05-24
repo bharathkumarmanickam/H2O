@@ -7,18 +7,20 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class civisuccess extends AppCompatActivity {
-    TextView id;
+    TextView ids;
     String idget;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_civisuccess);
-        idget = getIntent().getStringExtra("id").toString();
-        id.setText(idget);
+        ids = (TextView) findViewById(R.id.id);
+        idget = getIntent().getStringExtra("ids");
+        ids.setText(idget);
     }
 
     @Override
     public void onBackPressed() {
         startActivity(new Intent(civisuccess.this,civihome.class));
+        finish();
     }
 }

@@ -58,26 +58,43 @@
         android:layout_height="45dp"
         android:background="@drawable/input"
         android:layout_marginLeft="30dp"
+        android:focusable="false"
         android:layout_marginRight="30dp"
         android:layout_gravity="center"
         android:layout_marginBottom="25dp"
         android:hint="Rate Per Quantity"
         android:fontFamily="sans-serif"
         android:paddingLeft="14dp"/>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
     <EditText
         android:id="@+id/tc"
-        android:layout_width="match_parent"
+        android:layout_width="190dp"
         android:layout_height="45dp"
         android:background="@drawable/input"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_gravity="center"
         android:layout_marginBottom="45dp"
+        android:layout_marginTop="18dp"
+        android:focusable="false"
         android:hint="Total Cost"
         android:fontFamily="sans-serif"
         android:paddingLeft="14dp"/>
 
+        <Button
+            android:id="@+id/calculate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:backgroundTint="#1D92EF"
+            android:layout_marginRight="30dp"
+            android:text="Calculate" />
+
+
+    </LinearLayout>
     <Button
         android:id="@+id/byc"
         android:layout_width="match_parent"

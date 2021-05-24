@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.h2o">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.H2O">
-        <activity android:name=".proopenorders"></activity>
+        <activity android:name=".bookingwatch"></activity>
+        <activity android:name=".proopenorders" />
         <activity android:name=".prohome" />
         <activity android:name=".proconorders" />
         <activity android:name=".proconfirm" />

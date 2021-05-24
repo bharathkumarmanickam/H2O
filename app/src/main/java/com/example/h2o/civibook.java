@@ -24,8 +24,8 @@ import java.util.Random;
 
 public class civibook extends AppCompatActivity {
     EditText quantity, percost,tcost;
-    String qua,userid,id;
-    Button cal,back;
+    String qua,userid,id,finalcost;
+    Button cal,back,calcu;
     int call;
     FirebaseUser user;
     DatabaseReference reference,reference1;
@@ -38,53 +38,55 @@ public class civibook extends AppCompatActivity {
         userid = user.getUid();
         quantity = (EditText) findViewById(R.id.quan);
         percost = (EditText) findViewById(R.id.rpq);
-        percost.setText("40");
+        percost.setText("40 X Rate Per Quantity");
         tcost = (EditText)findViewById(R.id.tc);
         cal = (Button) findViewById(R.id.byc);
         back = (Button) findViewById(R.id.gth);
+        calcu = (Button) findViewById(R.id.calculate);
+
+        calcu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               String cost = quantity.getText().toString().trim();
+               if(!TextUtils.isEmpty(cost)){
+                   int number = Integer.parseInt(cost);
+                   int totcost = number * 40;
+                   finalcost = String.valueOf(totcost);
+                   tcost.setText(finalcost);
+               }else{
+                   quantity.setError("Quantity cannot be empty");
+                   quantity.requestFocus();
+               }
+
+
+            }
+        });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(civibook.this,civihome.class));
             }
         });
-        quantity.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                tcost.setText("0");
-            }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String val = s.toString();
-                call = 40 * Integer.parseInt(val);
-                tcost.setText(call);
-
-            }
-        });
         cal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 qua = quantity.getText().toString();
-                String calll = String.valueOf(call);
                 int ran = randomnumbers(999999,999999999);
                 id = String.valueOf(ran);
+                String status = "0";
                 if(!TextUtils.isEmpty(qua)){
-                    booking book = new booking(userid,qua,calll,id);
-                    FirebaseDatabase.getInstance().getReference("bookings").child(userid)
+                    booking book = new booking(userid,qua,finalcost,status);
+                    FirebaseDatabase.getInstance().getReference("bookings").child(id)
                             .setValue(book)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
                                         Intent intent = new Intent(civibook.this,civisuccess.class);
-                                        intent.putExtra("id",id);
+                                        intent.putExtra("ids",id);
                                         startActivity(intent);
+                                        finish();
 
                                     }
                                     else{
