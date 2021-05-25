@@ -32,9 +32,9 @@ public class civiorders extends AppCompatActivity {
     DatabaseReference databaseReference,reference,ref1;
     ProgressDialog progressDialog;
     ListView lv;
-    String userid;
+    String userid,bookid;
     FirebaseUser user;
-    String id,tc,oid;
+    String qid,tc,oid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +50,11 @@ public class civiorders extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(civiorders.this,bookingwatch.class);
                 intent.putExtra("userkey",oid);
-                intent.putExtra("quantity",id);
+                intent.putExtra("quantity",qid);
                 intent.putExtra("cost",tc);
+                intent.putExtra("bookid",bookid);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -69,12 +71,14 @@ public class civiorders extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 oid = snapshot.child("userid").getValue().toString();
                 if(oid.equals(userid)){
-                    id = snapshot.child("quantity").getValue().toString();
+                    qid = snapshot.child("quantity").getValue().toString();
                     tc = snapshot.child("tc").getValue().toString();
+                    bookid = snapshot.getKey();
+
                             if(progressDialog.isShowing()){
                                 progressDialog.dismiss();
                             }
-                            arrayList.add("Quantity : "+id+" Can Booked"+"\n"+"Tap here to View");
+                            arrayList.add("Quantity : "+qid+" Can Booked"+"\n"+"Tap here to View");
                             adapter.notifyDataSetChanged();
                 }
                 if(progressDialog.isShowing()){

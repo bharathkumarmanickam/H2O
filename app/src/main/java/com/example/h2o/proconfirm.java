@@ -150,8 +150,10 @@ public class proconfirm extends AppCompatActivity {
     }
 
     private void takebook() {
+        String veri = "0";
+        details det = new details(logkey,veri);
     FirebaseDatabase.getInstance().getReference("confirm").child(bookid)
-            .setValue(logkey)
+            .setValue(det)
             .addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {

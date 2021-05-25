@@ -3,7 +3,7 @@
     package="com.example.h2o">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.H2O">
-        <activity android:name=".bookingwatch"></activity>
+        <activity android:name=".proshowdet"></activity>
+        <activity android:name=".bookingwatch" />
         <activity android:name=".proopenorders" />
         <activity android:name=".prohome" />
         <activity android:name=".proconorders" />

@@ -31,7 +31,7 @@ public class civihome extends AppCompatActivity {
         three.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(civihome.this, login.class));
+                startActivity(new Intent(civihome.this, MainActivity.class));
                 finish();
 
             }

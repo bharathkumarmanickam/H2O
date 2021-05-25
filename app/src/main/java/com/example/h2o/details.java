@@ -1,7 +1,7 @@
 package com.example.h2o;
 
 public class details {
-    public String full,mobile,mobiletwo,address,email,paswd,conpaswd,type;
+    public String full,mobile,mobiletwo,address,email,paswd,conpaswd,type,logkey, veri;
     public  details(){
 
     }
@@ -14,6 +14,11 @@ public class details {
         this.paswd = paswd;
         this.conpaswd = conpaswd;
         this.type = type;
+    }
+
+    public details(String logkey,String veri){
+        this.logkey = logkey;
+        this.veri = veri;
     }
 
 
