@@ -34,7 +34,7 @@ public class proshowdet extends AppCompatActivity {
     String bookid,prokey,userid,mobileno,veri,verii;
     TextView fname,fadd,fmobile,fquan,fcost;
     Button call,com;
-    DatabaseReference databaseReference,databaseReference2;
+    DatabaseReference databaseReference,databaseReference2,ref3;
     ProgressDialog progressDialog;
     ImageView comp1;
     TextView comp2;
@@ -49,7 +49,6 @@ public class proshowdet extends AppCompatActivity {
         progressDialog.show();
         bookid = getIntent().getStringExtra("boid");
         prokey = getIntent().getStringExtra("prokey");
-        veri = getIntent().getStringExtra("veri");
         fname = (TextView) findViewById(R.id.name);
         fadd = (TextView) findViewById(R.id.address);
         fmobile = (TextView) findViewById(R.id.mob);
@@ -59,12 +58,44 @@ public class proshowdet extends AppCompatActivity {
         com = (Button) findViewById(R.id.co);
         comp1 = (ImageView) findViewById(R.id.comp1);
         comp2 = (TextView) findViewById(R.id.comp2);
-        if(veri.equals("1")){
-            call.setVisibility(INVISIBLE);
-            com.setVisibility(INVISIBLE);
-            comp1.setVisibility(VISIBLE);
-            comp2.setVisibility(VISIBLE);
-        }
+
+        ref3 = FirebaseDatabase.getInstance().getReference("confirm");
+        ref3.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String booki = snapshot.getKey();
+                if(booki.equals(bookid)){
+                    veri = snapshot.child("veri").getValue().toString();
+                    if(veri.equals("1")){
+                        call.setVisibility(INVISIBLE);
+                        com.setVisibility(INVISIBLE);
+                        comp1.setVisibility(VISIBLE);
+                        comp2.setVisibility(VISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

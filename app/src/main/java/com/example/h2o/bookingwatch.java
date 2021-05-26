@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,8 +24,9 @@ public class bookingwatch extends AppCompatActivity {
     TextView fquan,fcost,status;
     Button call,gb;
     String cost,quan,bookid,uid,number,id;
-    DatabaseReference databaseReference,ref2,ref3;
+    DatabaseReference databaseReference,ref2,ref3,ref4;
     ProgressDialog progressDialog;
+    FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +36,48 @@ public class bookingwatch extends AppCompatActivity {
         progressDialog.setMessage("Searching for Provider Details.....");
         progressDialog.setCancelable(false);
         progressDialog.show();
-        cost = getIntent().getStringExtra("cost");
-        quan = getIntent().getStringExtra("quantity");
         bookid = getIntent().getStringExtra("bookid");
-        uid = getIntent().getStringExtra("uid");
-
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        uid = firebaseUser.getUid();
         fquan = (TextView) findViewById(R.id.quan);
         fcost = (TextView) findViewById(R.id.totcost);
-        fquan.setText(quan);
-        fcost.setText(cost);
+
+        ref4 = FirebaseDatabase.getInstance().getReference("bookings");
+        ref4.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String bid = snapshot.getKey();
+                if(bid.equals(bookid)){
+                    cost = snapshot.child("tc").getValue().toString();
+                    quan = snapshot.child("quantity").getValue().toString();
+                    fquan.setText(quan);
+                    fcost.setText(cost);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
         status = (TextView) findViewById(R.id.status);
         call = (Button) findViewById(R.id.callp);
         gb = (Button) findViewById(R.id.gb);

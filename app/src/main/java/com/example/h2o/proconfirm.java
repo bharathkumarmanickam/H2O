@@ -30,7 +30,7 @@ public class proconfirm extends AppCompatActivity {
     TextView fname,fadd,fmobile,fquan,fcost;
     Button con,back;
     String userid,tc,quan,bookid;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference,ref4;
     String name, address, mobile;
     ProgressDialog progressDialog;
     FirebaseUser user;
@@ -46,16 +46,52 @@ public class proconfirm extends AppCompatActivity {
         progressDialog.setMessage("Please wait fetching for results......");
         progressDialog.show();
         userid = getIntent().getStringExtra("userkey");
-        tc = getIntent().getStringExtra("cost");
-        quan = getIntent().getStringExtra("quantity");
+
+
         bookid = getIntent().getStringExtra("id");
         fname = (TextView) findViewById(R.id.name);
         fadd = (TextView) findViewById(R.id.address);
         fmobile = (TextView) findViewById(R.id.mob);
+
         fquan = (TextView) findViewById(R.id.quan);
         fcost = (TextView) findViewById(R.id.totcost);
         fcost.setText(tc);
         fquan.setText(quan);
+
+        ref4 = FirebaseDatabase.getInstance().getReference("bookings");
+        ref4.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String bid = snapshot.getKey();
+                if(bid.equals(bookid)){
+                    tc = snapshot.child("tc").getValue().toString();
+                    quan = snapshot.child("quantity").getValue().toString();
+                    fquan.setText(quan);
+                    fcost.setText(tc);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         con = (Button) findViewById(R.id.confirm);
         back = (Button) findViewById(R.id.gb);
         con.setOnClickListener(new View.OnClickListener() {

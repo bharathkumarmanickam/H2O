@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,7 +32,7 @@ public class proconorders extends AppCompatActivity {
     ListView lv;
     ArrayList<String> arrayList = new ArrayList<>();
     ArrayAdapter<String> adapter;
-    String userid,bookid,key,veri;
+    String userid,bookid,key,veri,tempbookid;
     ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +48,23 @@ public class proconorders extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int count= 0;
+                String  itemValue    = (String) lv.getItemAtPosition(position);
+                String[] lines = itemValue.split("\\r?\\n");
+                for (String line : lines) {
+                    if(count == 0){
+
+                    }else{
+                        tempbookid = line;
+                    }
+                    count++;
+                }
                 Intent intent = new Intent(proconorders.this,proshowdet.class);
-                intent.putExtra("boid",bookid);
-                intent.putExtra("prokey",key);
-                intent.putExtra("veri",veri);
+                intent.putExtra("boid",tempbookid);
+                intent.putExtra("prokey",userid);
                 startActivity(intent);
                 finish();
+
                        }
         });
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,arrayList);
@@ -64,11 +76,12 @@ public class proconorders extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 key = snapshot.child("logkey").getValue().toString();
                 veri = snapshot.child("veri").getValue().toString();
-                if(userid.equals(key) && veri.equals("0") || veri.equals("1")){
+                if(userid.equals(key)){
                     bookid = snapshot.getKey();
+                    adapter.add("Order No : \n"+bookid);
+                    adapter.notifyDataSetChanged();
                 }
-                adapter.add("Order No : "+bookid);
-                adapter.notifyDataSetChanged();
+
                 if(progressDialog.isShowing()){
                     progressDialog.dismiss();
                 }

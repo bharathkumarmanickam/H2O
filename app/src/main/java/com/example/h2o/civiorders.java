@@ -49,12 +49,12 @@ public class civiorders extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(civiorders.this,bookingwatch.class);
-                intent.putExtra("userkey",oid);
-                intent.putExtra("quantity",qid);
-                intent.putExtra("cost",tc);
-                intent.putExtra("bookid",bookid);
+                String  itemValue    = (String) lv.getItemAtPosition(position);
+                intent.putExtra("bookid",itemValue);
                 startActivity(intent);
                 finish();
+
+
             }
         });
 
@@ -78,7 +78,8 @@ public class civiorders extends AppCompatActivity {
                             if(progressDialog.isShowing()){
                                 progressDialog.dismiss();
                             }
-                            arrayList.add("Quantity : "+qid+" Can Booked"+"\n"+"Tap here to View");
+                            arrayList.add(bookid);
+
                             adapter.notifyDataSetChanged();
                 }
                 if(progressDialog.isShowing()){
